@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ST Analyzer — Диаграмма состояний и карты Карно</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>ST Analyzer</h1>
+      <p>Вставьте Structured Text (ST) код контроллера, чтобы построить диаграмму состояний и карты Карно.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Входной ST код</h2>
+        <textarea id="stInput" spellcheck="false">
+(* Пример ST *)
+CASE State OF
+  Idle:
+    IF Start AND NOT Fault THEN
+      State := Run;
+    END_IF;
+
+  Run:
+    IF Stop THEN
+      State := Idle;
+    ELSIF Fault THEN
+      State := Alarm;
+    END_IF;
+
+  Alarm:
+    IF Reset THEN
+      State := Idle;
+    END_IF;
+END_CASE;
+        </textarea>
+        <button id="analyzeBtn">Построить</button>
+        <p id="status" class="status"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Диаграмма состояний</h2>
+        <div id="diagram" class="diagram"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Карты Карно (по переходам)</h2>
+        <div id="karnaughContainer" class="karnaugh-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>
+        Поддерживается упрощённый синтаксис CASE/IF/ELSIF и переходы вида
+        <code>State := NextState;</code>
+      </small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
