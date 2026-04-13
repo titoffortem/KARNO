@@ -21,7 +21,7 @@
 Что нужно сделать один раз:
 
 1. Откройте **Settings** → **Pages**.
-2. В **Source** выберите `GitHub Actions`.
+2. В **Source** выберите `GitHub Actions` (важно, иначе workflow может упасть с ошибкой `Get Pages site failed`).
 3. Запушьте изменения в ветку `main`.
 4. Перейдите во вкладку **Actions** и дождитесь успешного workflow `Deploy static site to GitHub Pages`.
 
